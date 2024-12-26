@@ -1,0 +1,11 @@
+### Copyright (c) 2024 Francisco Javier Sánchez Valle ###
+
+# Este archivo de código fuente es un emulador de Chip8 escrito en BASIC. No se puede modificar, redistribuir ni utilizar para crear trabajos derivados. #
+
+## Licencia: ##
+
+# Este código está licenciado bajo la Licencia Creative Commons Atribución-NoComercial-SinObraDerivada 4.0 Internacional (CC BY-NC-ND 4.0). Puedes copiar y compartir este código solo con fines no comerciales y siempre que se dé crédito adecuado al autor, pero no puedes modificarlo ni crear obras derivadas de él. #
+
+## Texto completo de la licencia: ##
+
+# La siguiente es la licencia completa en español. Puedes acceder a ella también en el sitio web oficial de Creative Commons: [https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es) #
