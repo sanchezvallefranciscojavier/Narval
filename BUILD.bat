@@ -13,7 +13,7 @@ IF ERRORLEVEL 1 (
 )
 
 ECHO "Construyendo ejecutable"
-fbc i_cpu_t.bas instructions.bas graphics.bas main.bas -x Chip8.exe
+fbc i_cpu_t.bas instructions.bas graphics.bas main.bas -x Narval.exe
 ECHO "Ejecutable construido correctamente. Pulse una tecla para salir"
 PAUSE
 EXIT

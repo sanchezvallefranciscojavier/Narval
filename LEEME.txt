@@ -1,2 +1,2 @@
 Narval es un emulador / intérprete de Chip8 escrito en BASIC.
-Hay que tener en cuenta algunos 
+Es necesario colocar la librería SDL2.dll en la raíz del proyecto para que pueda compilar.
