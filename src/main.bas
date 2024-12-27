@@ -3,16 +3,18 @@
 
 Dim Shared As UByte KeyMap(15)
 
-Sub MicroSleep(microsegundos As ULong)
+' Duerme la ejecución por la cantidad de microsegundos indicada en @microseconds
+Sub MicroSleep(microseconds As ULong)
 	Dim t1 As Double = Timer
 	Dim t2 As Double = t1
-	Dim target As Double = microsegundos / 1000000.0 ' Convertir a segundos
+	Dim target As Double = microseconds / 1000000.0 ' Convertir a segundos
 
 	Do
 		t2 = Timer
 	Loop While (t2 - t1) < target
 End Sub
 
+' Lee los bytes del fichero cuyo nombre es indicado por @FilePath al búfer @Buffer
 Function ReadFileBytes(ByRef FilePath As String, ByRef Buffer As UByte Ptr) As Long
 	Dim FileHandle As Integer
 	Dim FileSize As Long
@@ -36,6 +38,7 @@ Function ReadFileBytes(ByRef FilePath As String, ByRef Buffer As UByte Ptr) As L
 	Return FileSize
 End Function
 
+' Obtiene la dirección del fichero / primer argumento de la aplicación
 Function GetFilePath() As String
 	Dim FilePath As String
 
@@ -50,6 +53,7 @@ Function GetFilePath() As String
     Return FilePath
 End Function
 
+' Obtiene la frecuencia de ejecución del intérprete / segundo argumento de la aplicación
 Function GetFrequency() As Long
 	Dim Frequency As Long
 	
@@ -64,6 +68,7 @@ Function GetFrequency() As Long
 	Return Frequency
 End Function
 
+' Carga el layout del teclado en el array KeyMap()
 Sub LoadKeymap()
 	KeyMap(0) = SDLK_x
 	KeyMap(1) = SDLK_1
@@ -82,7 +87,8 @@ Sub LoadKeymap()
 	KeyMap(&hE) = SDLK_f
 	KeyMap(&hF) = SDLK_v
 End Sub
-	
+
+' Función principal (main)
 Sub Main()
 	Cls
 	
@@ -93,9 +99,11 @@ Sub Main()
 
 	Cls
 	
+	' Declaración del búfer donde se almacenará el contenido del fichero (ROM)
 	Dim Buffer As UByte Ptr
 	Dim FileLength As Long = ReadFileBytes(FilePath, Buffer)
 	
+	' Inicialización del CPU
 	Dim CPU As CPU_T = CPU_T(Buffer, FileLength)
 	
 	GraphicsInit
@@ -138,4 +146,5 @@ Sub Main()
 	GraphicsQuit()
 End Sub
 
+' Entrypoint
 Main

@@ -12,8 +12,12 @@ IF ERRORLEVEL 1 (
     EXIT
 )
 
+IF NOT EXIST ".\Target" (
+    MD Target
+)
+
 ECHO "Construyendo ejecutable"
-fbc -m main src/cpu_t.bas src/instructions.bas src/graphics.bas src/main.bas -x Narval.exe
+fbc -m main appicon.rc src/cpu_t.bas src/instructions.bas src/graphics.bas src/main.bas -x Target/Narval.exe
 ECHO "Ejecutable construido correctamente. Pulse una tecla para salir"
 PAUSE
 EXIT
