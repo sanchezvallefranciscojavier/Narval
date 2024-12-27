@@ -4,7 +4,7 @@
 Function ReadFileBytes(ByRef FilePath As String, ByRef Buffer As UByte Ptr) As Long
 	Dim FileHandle As Integer
 	Dim FileSize As Long
-
+	
 	' Abrir el archivo en modo binario
 	FileHandle = FreeFile
 	Open FilePath For Binary As #FileHandle
@@ -24,15 +24,28 @@ Function ReadFileBytes(ByRef FilePath As String, ByRef Buffer As UByte Ptr) As L
 	Return FileSize
 End Function
 
+Function GetFilePath() As String
+	Dim FilePath As String
+
+    If Command() = "" Then
+        Print "Uso: Narval.exe <Ruta a ROM>"
+        Stop
+    End If
+    
+    FilePath = Command(1)
+    Print "Archivo cargado: "; FilePath
+
+	Sleep(1000)
+
+	Cls
+    
+    Return FilePath
+End Function
+
 Sub Main()
 	Cls
 	
-	Dim As String FilePath = Command(1)
-	
-	If FilePath = "" Then
-		Print "Uso: Narval.exe <Ruta a ROM>"
-		Stop
-	End If
+	Dim FilePath As String = GetFilePath()
 	
 	Dim Buffer As UByte Ptr
 	Dim FileLength As Long = ReadFileBytes(FilePath, Buffer)
