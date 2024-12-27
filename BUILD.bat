@@ -13,7 +13,7 @@ IF ERRORLEVEL 1 (
 )
 
 ECHO "Construyendo ejecutable"
-fbc -m main i_cpu_t.bas instructions.bas graphics.bas main.bas -x Narval.exe
+fbc -m main src/cpu_t.bas src/instructions.bas src/graphics.bas src/main.bas -x Narval.exe
 ECHO "Ejecutable construido correctamente. Pulse una tecla para salir"
 PAUSE
 EXIT

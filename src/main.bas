@@ -54,7 +54,7 @@ Function GetFrequency() As Long
 	Dim Frequency As Long
 	
 	If Command(2) = "" Then
-		Print "Uso: Narval.exe <Ruta a ROM> <Frecuencia de emulación>"
+		Print "Uso: Narval.exe <Ruta a ROM> <Frecuencia de emulacion>"
 		Stop
 	End If
 	
