@@ -59,9 +59,12 @@ Sub Main()
 	
 	While Not QuitFlag
 		While SDL_PollEvent(@Evt) <> 0
-			If Evt.type = SDL_QUIT_ Then
-				QuitFlag = True 
-			End If
+			Select Case Evt.type
+			Case SDL_QUIT_
+				QuitFlag = True
+			Case Else
+				
+			End Select
 		Wend
 		
 		CPU.Cycle()

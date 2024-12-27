@@ -7,6 +7,7 @@
 #define START_ADDR &h200
 #define FONT_START_ADDR &h50
 #define FONTSET_SIZE 79
+#define KEYPAD_SIZE 15
 
 Type CPU_T
     Memory(0 To MEM_SIZE) As UByte ' RAM MEMORY
@@ -20,6 +21,7 @@ Type CPU_T
     V(0 To V_REGS_SIZE) As UByte ' V REGISTERS
     Opcode As UShort ' CURRENT INSTRUCTION
     DF As Boolean ' DRAW FLAG
+    Keypad(0 To KEYPAD_SIZE) As Boolean ' KEYPAD
 
     Declare Constructor(ByRef Rom As UByte Ptr, ByVal RomSize As Long)
 

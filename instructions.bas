@@ -156,11 +156,15 @@ Sub _DXYN(ByRef CPU As CPU_T, X As UByte, Y As UByte, N As UByte)
 End Sub
 
 Sub _EX9E(ByRef CPU As CPU_T, X As UByte)
-	' TODO
+	If CPU.Keypad(CPU.V(X)) Then
+		CPU.PC += 2
+	End If
 End Sub
 
 Sub _EXA1(ByRef CPU As CPU_T, X As UByte)
-	' TODO
+	If Not CPU.Keypad(CPU.V(X)) Then
+		CPU.PC += 2
+	End If
 End Sub
 
 Sub _FX07(ByRef CPU As CPU_T, X As UByte)
@@ -168,7 +172,19 @@ Sub _FX07(ByRef CPU As CPU_T, X As UByte)
 End Sub
 
 Sub _FX0A(ByRef CPU As CPU_T, X As UByte)
-	' TODO
+	Dim As Boolean Flag = False
+
+	For Key As Integer = 0 To KEYPAD_SIZE
+		If CPU.Keypad(Key) Then
+			Flag = True
+			CPU.V(X) = Key
+			Exit For
+		End If
+	Next
+
+	If Not Flag Then
+		CPU.PC -= 2
+	End If
 End Sub
 
 Sub _FX15(ByRef CPU As CPU_T, X As UByte)
@@ -188,7 +204,9 @@ Sub _FX29(ByRef CPU As CPU_T, FONTS() As UByte, X As UByte)
 End Sub
 
 Sub _FX33(ByRef CPU As CPU_T, X As UByte)
-	' TODO
+	CPU.Memory(CPU.I) = CPU.V(X) / 100
+	CPU.Memory(CPU.I + 1) = (CPU.V(X) / 10) Mod 10
+	CPU.Memory(CPU.I + 2) = (CPU.V(X) Mod 100) Mod 10
 End Sub
 
 Sub _FX55(ByRef CPU As CPU_T, X As UByte)
