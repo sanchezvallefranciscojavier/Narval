@@ -138,7 +138,7 @@ Sub CPU_T.ExecuteInstruction()
 			_FX65(This, X)
 		End Select
 	Case Else
-		UnknownFlag = True 
+		UnknownFlag = True
 	End Select
 	
 	If UnknownFlag Then

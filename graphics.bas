@@ -26,8 +26,8 @@ Sub DrawRect(X As Integer, Y As Integer, Colour As Integer)
 End Sub
 
 Sub UpdateScreen(ByRef CPU As CPU_T)
-	For X As Integer = 0 To 63
-		For Y As Integer = 0 To 31
+	For X As Integer = 0 To SCREEN_WIDTH
+		For Y As Integer = 0 To SCREEN_HEIGHT
 			If CPU.Display(X, Y) Then
 				DrawRect(X, Y, &hFF)
 			Else
