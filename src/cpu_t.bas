@@ -60,85 +60,52 @@ Sub CPU_T.ExecuteInstruction()
 	Select Case (Opcode And &hF000)
 	Case &h0000
 		Select Case (Opcode And &hFF)
-		Case &hE0
-			_00E0(This)
-		Case &hEE
-			_00EE(This)
+		Case &hE0 : _00E0(This)
+		Case &hEE : _00EE(This)
 		End Select
-	Case &h1000
-		_1NNN(This, NNN)
-	Case &h2000
-		_2NNN(This, NNN)
-	Case &h3000
-		_3XNN(This, X, NN)
-	Case &h4000
-		_4XNN(This, X, NN)
-	Case &h5000
-		_5XY0(This, X, Y)
-	Case &h6000
-		_6XNN(This, X, NN)
-	Case &h7000
-		_7XNN(This, X, NN)
+	Case &h1000 : _1NNN(This, NNN)
+	Case &h2000 : _2NNN(This, NNN)
+	Case &h3000 : _3XNN(This, X, NN)
+	Case &h4000 : _4XNN(This, X, NN)
+	Case &h5000 : _5XY0(This, X, Y)
+	Case &h6000 : _6XNN(This, X, NN)
+	Case &h7000 : _7XNN(This, X, NN)
 	Case &h8000
 		Select Case (Opcode And &hF)
-		Case &h0
-			_8XY0(This, X, Y)
-		Case &h1
-			_8XY1(This, X, Y)
-		Case &h2
-			_8XY2(This, X, Y)
-		Case &h3
-			_8XY3(This, X, Y)
-		Case &h4
-			_8XY4(This, X, Y)
-		Case &h5
-			_8XY5(This, X, Y)
-		Case &h6
-			_8XY6(This, X, Y)
-		Case &h7
-			_8XY7(This, X, Y)
-		Case &hE
-			_8XYE(This, X, Y)
+		Case &h0 : _8XY0(This, X, Y)
+		Case &h1 : _8XY1(This, X, Y)
+		Case &h2 : _8XY2(This, X, Y)
+		Case &h3 : _8XY3(This, X, Y)
+		Case &h4 : _8XY4(This, X, Y)
+		Case &h5 : _8XY5(This, X, Y)
+		Case &h6 : _8XY6(This, X, Y)
+		Case &h7 : _8XY7(This, X, Y)
+		Case &hE : _8XYE(This, X, Y)
 		End Select
-	Case &hA000
-		_ANNN(This, NNN)
-	Case &hB000
-		_BNNN(This, NNN)
-	Case &hC000
-		_CXNN(This, X, NN)
+	Case &hA000 : _ANNN(This, NNN)
+	Case &hB000 : _BNNN(This, NNN)
+	Case &hC000 : _CXNN(This, X, NN)
 	Case &hD000
 		_DXYN(This, X, Y, N)
 		DF = True
 	Case &hE000
 		Select Case (Opcode And &hFF)
-		Case &h9E
-			_EX9E(This, X)
-		Case &hA1
-			_EXA1(This, X)
+		Case &h9E : _EX9E(This, X)
+		Case &hA1 : _EXA1(This, X)
 		End Select
 	Case &hF000
 		Select Case (Opcode And &hFF)
-		Case &h07
-			_FX07(This, X)
-		Case &h0A
-			_FX0A(This, X)
-		Case &h15
-			_FX15(This, X)
-		Case &h18
-			_FX18(This, X)
-		Case &h1E
-			_FX1E(This, X)
-		Case &h29
-			_FX29(This, Fonts(), X)
-		Case &h33
-			_FX33(This, X)
-		Case &h55
-			_FX55(This, X)
-		Case &h65
-			_FX65(This, X)
+		Case &h07 : _FX07(This, X)
+		Case &h0A : _FX0A(This, X)
+		Case &h15 : _FX15(This, X)
+		Case &h18 : _FX18(This, X)
+		Case &h1E : _FX1E(This, X)
+		Case &h29 : _FX29(This, Fonts(), X)
+		Case &h33 : _FX33(This, X)
+		Case &h55 : _FX55(This, X)
+		Case &h65 : _FX65(This, X)
 		End Select
-	Case Else
-		UnknownFlag = True
+	Case Else : UnknownFlag = True
 	End Select
 	
 	If UnknownFlag Then

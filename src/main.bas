@@ -43,7 +43,7 @@ Function GetFilePath() As String
 	Dim FilePath As String
 
     If Command(1) = "" Then
-        Print "Uso: Narval.exe <Ruta a ROM> <Frecuencia de emulación>"
+        Print "Uso: Narval.exe <Ruta a ROM> <Frecuencia de emulacion>"
         Stop
     End If
     
@@ -106,13 +106,20 @@ Sub Main()
 	' Inicialización del CPU
 	Dim CPU As CPU_T = CPU_T(Buffer, FileLength)
 	
+	' Inicialización de gráficos
 	GraphicsInit
 		
 	Dim As Boolean QuitFlag = False
 	Dim As SDL_Event Evt
 	
+	' Carga del keymap
 	LoadKeymap
 	
+	/' 
+	Mientras que la quitFlag sea falsa, se cargan los eventos en Evt.
+	Si el evento es SDL_QUIT_ (se clica en la X de la ventana) se cierra el programa.
+	Tras el switch de eventos, se realiza un ciclo de emulación con la frecuencia indicada
+	'/
 	While Not QuitFlag
 		While SDL_PollEvent(@Evt) <> 0
 			Select Case Evt.type
@@ -143,6 +150,7 @@ Sub Main()
 		MicroSleep(1000000 / Frequency)
 	Wend
 	
+	' Finalización de gráficos
 	GraphicsQuit()
 End Sub
 
