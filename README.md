@@ -4,11 +4,11 @@
 </div>
 
 ## Emulador / Intérprete de Chip8
-**Narval** es un intérprete de código máquina para Chip8 programado en BASIC.  
+**Narval** es un intérprete de código máquina para Chip8 y desensamblador programado en BASIC.  
 
 Uso:
 ```cmd
-Narval.exe <Ruta a la ROM> <Frecuencia>
+Narval.exe <--emulate / --disassemble> <Ruta a la ROM> ?<Frecuencia>
 ```
 
 Compilación:
@@ -19,4 +19,4 @@ BUILD.bat
 En este momento no está contemplada la compilación en Linux, aunque el programa debería ser completamente compatible.
 
 Una vez compilado el programa, se guardará en la carpeta "Target" el binario generado.  
-Es necesario tener la librería SDL2.dll tanto en la raíz del programa (donde se encuentra BUILD.bat) como en la carpeta "Target".
+Es necesario tener la librería SDL2.dll tanto en la raíz del programa (donde se encuentra BUILD.bat) como en la carpeta "Target" para utilizar el emulador.
