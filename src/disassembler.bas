@@ -76,8 +76,11 @@ Sub DisassembleROM(ByRef Rom As UByte Ptr, ByVal RomSize As Integer)
 		Opcode = (*(Rom + Index) Shl 8) Or *(Rom + Index + 1)
 		DisassembledInstruction = DisassembleSingleInstruction(Opcode)
 		
-		Print DisassembledInstruction
-		Print #1, DisassembledInstruction
+		If DisassembledInstruction <> "" Then
+			Print DisassembledInstruction
+			Print #1, DisassembledInstruction
+		End If
+
 	Next
 	
 	Close #1
