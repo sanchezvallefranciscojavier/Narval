@@ -1,11 +1,12 @@
 #include "cpu_t.bi"
 #include "graphics.bi"
 #include "utils.bi"
+#include "disassembler.bi"
 
 Dim Shared As UByte KeyMap(15)
 
 ' Carga el layout del teclado en el array KeyMap()
-Sub LoadKeymap()
+Sub LoadKeymap
 	KeyMap(0) = SDLK_x
 	KeyMap(1) = SDLK_1
 	KeyMap(2) = SDLK_2
@@ -80,12 +81,31 @@ Sub Emulate
 			End Select
 		Wend
 		
-		CPU.Cycle()
+		CPU.Cycle
 		MicroSleep(1000000 / Frequency)
 	Wend
 	
 	' Finalización de gráficos
-	GraphicsQuit()
+	GraphicsQuit
+End Sub
+
+' Subrutina de desensamblaje del ROM
+Sub Disassemble
+	Dim FilePath As String = GetFilePath
+	
+	Sleep(1000)
+	
+	Cls
+	
+	' Declaración del búfer donde se almacenará el contenido del fichero (ROM)
+	Dim Buffer As UByte Ptr
+	Dim FileLength As Long = ReadFileBytes(FilePath, Buffer)
+	
+	DisassembleROM(Buffer, FileLength)
+	
+	Print "ROM desensamblada correctamente."
+	
+	Stop
 End Sub
 
 ' Subrutina principal de la aplicación
@@ -93,10 +113,10 @@ Sub Main
 	Cls
 	
 	Dim As String Mode = Command(1)
+	
 	Select Case Mode
 	Case "--emulate" : Emulate
-	Case "--disassemble"
-		
+	Case "--disassemble" : Disassemble
 	Case Else
 		Print "Uso: Narval.exe <--Modo> <Ruta a ROM> <Frecuencia de emulacion>"
 		Stop

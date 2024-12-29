@@ -17,7 +17,7 @@ IF NOT EXIST ".\Target" (
 )
 
 ECHO "Construyendo ejecutable"
-fbc -m main appicon.rc src/cpu_t.bas src/instructions.bas src/graphics.bas src/utils.bas src/main.bas -x Target/Narval.exe
+fbc -m main appicon.rc src/cpu_t.bas src/instructions.bas src/graphics.bas src/utils.bas src/disassembler.bas src/main.bas -x Target/Narval.exe
 ECHO "Ejecutable construido correctamente. Pulse una tecla para salir"
 PAUSE
 EXIT
