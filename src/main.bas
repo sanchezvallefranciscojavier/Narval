@@ -1,72 +1,8 @@
 #include "cpu_t.bi"
 #include "graphics.bi"
+#include "utils.bi"
 
 Dim Shared As UByte KeyMap(15)
-
-' Duerme la ejecución por la cantidad de microsegundos indicada en @microseconds
-Sub MicroSleep(microseconds As ULong)
-	Dim t1 As Double = Timer
-	Dim t2 As Double = t1
-	Dim target As Double = microseconds / 1000000.0 ' Convertir a segundos
-
-	Do
-		t2 = Timer
-	Loop While (t2 - t1) < target
-End Sub
-
-' Lee los bytes del fichero cuyo nombre es indicado por @FilePath al búfer @Buffer
-Function ReadFileBytes(ByRef FilePath As String, ByRef Buffer As UByte Ptr) As Long
-	Dim FileHandle As Integer
-	Dim FileSize As Long
-	
-	' Abrir el archivo en modo binario
-	FileHandle = FreeFile
-	Open FilePath For Binary As #FileHandle
-	
-	' Obtener el tamaño del archivo
-	FileSize = LOF(FileHandle)
-	
-	' Reservar memoria para el buffer
-	Buffer = Allocate(FileSize)
-	
-	' Leer el archivo completo en el buffer
-	Get #FileHandle, , *Buffer, FileSize
-	
-	' Cerrar el archivo
-	Close #FileHandle
-	
-	Return FileSize
-End Function
-
-' Obtiene la dirección del fichero / primer argumento de la aplicación
-Function GetFilePath() As String
-	Dim FilePath As String
-
-    If Command(1) = "" Then
-        Print "Uso: Narval.exe <Ruta a ROM> <Frecuencia de emulacion>"
-        Stop
-    End If
-    
-    FilePath = Command(1)
-    Print "Archivo cargado: "; FilePath
-    
-    Return FilePath
-End Function
-
-' Obtiene la frecuencia de ejecución del intérprete / segundo argumento de la aplicación
-Function GetFrequency() As Long
-	Dim Frequency As Long
-	
-	If Command(2) = "" Then
-		Print "Uso: Narval.exe <Ruta a ROM> <Frecuencia de emulacion>"
-		Stop
-	End If
-	
-	Frequency = CInt(Command(2))
-	Print "Frecuencia: "; Frequency ; "Hz"
-	
-	Return Frequency
-End Function
 
 ' Carga el layout del teclado en el array KeyMap()
 Sub LoadKeymap()
@@ -88,10 +24,8 @@ Sub LoadKeymap()
 	KeyMap(&hF) = SDLK_v
 End Sub
 
-' Función principal (main)
-Sub Main()
-	Cls
-	
+' Sub de emulación
+Sub Emulate
 	Dim FilePath As String = GetFilePath
 	Dim Frequency As Long = GetFrequency
 	
@@ -152,6 +86,21 @@ Sub Main()
 	
 	' Finalización de gráficos
 	GraphicsQuit()
+End Sub
+
+' Subrutina principal de la aplicación
+Sub Main
+	Cls
+	
+	Dim As String Mode = Command(1)
+	Select Case Mode
+	Case "--emulate" : Emulate
+	Case "--disassemble"
+		
+	Case Else
+		Print "Uso: Narval.exe <--Modo> <Ruta a ROM> <Frecuencia de emulacion>"
+		Stop
+	End Select
 End Sub
 
 ' Entrypoint
